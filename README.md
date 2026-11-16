@@ -100,7 +100,7 @@ src/
 - [x] 1. Modelo de datos y almacenamiento local
 - [x] 2. Tarjetas y sesión de repaso con FSRS
 - [x] 3. Rutas y lecciones (+ contenido inicial)
-- [ ] 4. Cuaderno de errores
+- [x] 4. Cuaderno de errores
 - [ ] 5. Panel de inicio
 - [ ] 6. Práctica intercalada
 - [ ] 7. Importar/exportar (CSV y backup JSON)

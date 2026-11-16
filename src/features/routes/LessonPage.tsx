@@ -132,6 +132,11 @@ export function LessonPage() {
 
       {lesson.suggestedCards.length > 0 && <SuggestedCards lesson={lesson} deckName={module.title} />}
 
+      <p className="small">
+        ¿Te equivocaste en un ejercicio de este tema?{' '}
+        <Link to={`/errores/nuevo?leccion=${lesson.id}`}>Anotalo en el cuaderno de errores</Link>.
+      </p>
+
       <nav aria-label="Lecciones" className="row-wrap lesson-nav">
         {prev && <Link to={`/lecciones/${prev.id}`}>← {prev.title}</Link>}
         <span className="grow" />

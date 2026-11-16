@@ -599,3 +599,111 @@ details[open] summary {
   opacity: 0.6;
   cursor: wait;
 }
+
+/* ---------- Cuaderno de errores ---------- */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0 1rem;
+}
+.bar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bar-row {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(6rem, 40%) 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.4rem;
+  cursor: pointer;
+  text-align: left;
+}
+.bar-row:hover {
+  border-color: var(--border);
+}
+.bar-row.selected {
+  border-color: var(--primary);
+}
+.bar-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bar {
+  height: 0.6rem;
+  min-width: 2px;
+  background: var(--primary);
+  border-radius: 999px;
+}
+.bar-count {
+  font-variant-numeric: tabular-nums;
+  min-width: 1.5rem;
+  text-align: right;
+}
+
+.mistake p:first-child {
+  margin-top: 0;
+}
+.mistake-detail h3 {
+  font-size: 0.95rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.mistake .actions {
+  margin-top: 0.75rem;
+}
+.cause-concepto {
+  color: var(--new);
+  border-color: currentColor;
+}
+.cause-algebra {
+  color: var(--error);
+  border-color: currentColor;
+}
+.cause-distraccion {
+  color: var(--warn);
+  border-color: currentColor;
+}
+.cause-unidades {
+  color: var(--ok);
+  border-color: currentColor;
+}
+
+fieldset.field {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+fieldset.field legend {
+  padding: 0;
+  margin-bottom: 0.3rem;
+}
+.cause-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.5rem;
+}
+.cause-option {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+}
+.cause-option.selected {
+  border-color: var(--primary);
+}
+.cause-option span {
+  display: flex;
+  flex-direction: column;
+}

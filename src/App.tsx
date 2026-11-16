@@ -7,6 +7,8 @@ import { CardsPage } from './features/decks/CardsPage'
 import { DecksPage } from './features/decks/DecksPage'
 import { NoteEditorPage } from './features/decks/NoteEditorPage'
 import { HomePage } from './features/home/HomePage'
+import { MistakeEditorPage } from './features/mistakes/MistakeEditorPage'
+import { MistakesPage } from './features/mistakes/MistakesPage'
 import { ReviewPage } from './features/review/ReviewPage'
 import { LessonPage } from './features/routes/LessonPage'
 import { RoutePage } from './features/routes/RoutePage'
@@ -26,7 +28,9 @@ export function App() {
         <Route path="tarjetas" element={<CardsPage />} />
         <Route path="tarjetas/nueva" element={<NoteEditorPage key="nueva" />} />
         <Route path="tarjetas/:noteId" element={<NoteEditorPage />} />
-        <Route path="errores" element={<Placeholder title="Cuaderno de errores" stage={4} />} />
+        <Route path="errores" element={<MistakesPage />} />
+        <Route path="errores/nuevo" element={<MistakeEditorPage key="nuevo" />} />
+        <Route path="errores/:mistakeId" element={<MistakeEditorPage />} />
         <Route path="practica" element={<Placeholder title="Práctica intercalada" stage={6} />} />
         <Route path="ajustes" element={<SettingsPage />} />
         <Route path="*" element={<NotFound />} />
