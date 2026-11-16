@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router'
 import { Layout } from './components/Layout'
 import { CardsPage } from './features/decks/CardsPage'
 import { DecksPage } from './features/decks/DecksPage'
+import { ImportCsvPage } from './features/decks/ImportCsvPage'
 import { NoteEditorPage } from './features/decks/NoteEditorPage'
 import { HomePage } from './features/home/HomePage'
 import { MistakeEditorPage } from './features/mistakes/MistakeEditorPage'
@@ -25,6 +26,7 @@ export function App() {
         <Route path="lecciones/:lessonId" element={<LessonPage />} />
         <Route path="repasar" element={<ReviewPage />} />
         <Route path="mazos" element={<DecksPage />} />
+        <Route path="mazos/importar" element={<ImportCsvPage />} />
         <Route path="tarjetas" element={<CardsPage />} />
         <Route path="tarjetas/nueva" element={<NoteEditorPage key="nueva" />} />
         <Route path="tarjetas/:noteId" element={<NoteEditorPage />} />

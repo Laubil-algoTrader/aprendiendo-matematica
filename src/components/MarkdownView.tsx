@@ -5,6 +5,7 @@
 // - react-markdown NO inserta HTML crudo, así que es seguro mostrar
 //   contenido escrito por otras personas (por ejemplo, un CSV importado).
 
+import { memo } from 'react'
 import Markdown from 'react-markdown'
 import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
@@ -17,11 +18,16 @@ const rehypePlugins: Parameters<typeof Markdown>[0]['rehypePlugins'] = [
 ]
 
 /**
+ * Está envuelto en `memo`: si el texto no cambió, React reutiliza el resultado
+ * anterior en vez de volver a procesar el Markdown y las fórmulas (que es lento).
+ * Importa en páginas largas como las lecciones, que se re-dibujan cuando cambia
+ * el progreso.
+ *
  * @param shiftHeadings baja un nivel los títulos (## pasa a ser h3). Se usa cuando el
  *   Markdown va dentro de una sección que ya tiene su propio título h2, para que la
  *   jerarquía de títulos sea correcta (importa para lectores de pantalla).
  */
-export function MarkdownView({
+export const MarkdownView = memo(function MarkdownView({
   children,
   className,
   shiftHeadings = false,
@@ -53,4 +59,4 @@ export function MarkdownView({
       </Markdown>
     </div>
   )
-}
+})

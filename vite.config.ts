@@ -11,5 +11,8 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    // Los tests de interfaz dibujan muchas fórmulas en un navegador simulado,
+    // que es lento: damos margen para computadoras con menos recursos.
+    testTimeout: 15_000,
   },
 })

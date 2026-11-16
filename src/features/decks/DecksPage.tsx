@@ -75,6 +75,9 @@ export function DecksPage() {
           <Link to="/tarjetas" className="btn">
             Buscar tarjetas
           </Link>
+          <Link to="/mazos/importar" className="btn">
+            Importar CSV
+          </Link>
           <Link to="/tarjetas/nueva" className="btn btn-primary">
             + Nueva tarjeta
           </Link>

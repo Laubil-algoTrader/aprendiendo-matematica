@@ -812,3 +812,28 @@ fieldset.field legend {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+
+/* ---------- Importar / exportar ---------- */
+
+.code-sample {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+  margin: 0;
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.table-scroll td {
+  overflow-wrap: anywhere;
+}
+/* Un <label class="btn"> con el input de archivo oculto adentro: el foco del
+   input invisible se muestra en el botón. */
+label.btn:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}

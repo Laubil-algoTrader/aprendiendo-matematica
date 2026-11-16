@@ -55,6 +55,31 @@ Otros comandos:
 - El programa de repasos lo calcula [FSRS](https://github.com/open-spaced-repetition/ts-fsrs)
   (versión FSRS-7) apuntando a recordar el 90 % de las tarjetas.
 
+## Importar tarjetas desde CSV
+
+En **Mazos → Importar CSV**. El archivo tiene tres columnas: `frente`, `dorso` y
+`etiquetas` (separadas por espacios). La primera fila puede ser el encabezado y el
+separador puede ser coma o punto y coma (lo que usa Excel en español).
+
+```csv
+frente,dorso,etiquetas
+¿Cuánto es $|-3|$?,$3$,valor-absoluto
+"La resolvente es $x = {{c1::\frac{-b \pm \sqrt{\Delta}}{2a}}}$",,cuadratica
+```
+
+- Si el frente tiene huecos `{{c1::...}}`, la tarjeta se importa como cloze.
+- Antes de importar se muestra una revisión con las filas que tienen problemas.
+- Por defecto se saltean las filas cuyo frente ya existe en el mazo elegido.
+
+## Backup de tus datos
+
+Tus datos viven solo en el navegador. En **Ajustes → Tus datos**:
+
+- **Descargar backup (JSON):** guarda todo (mazos, tarjetas, historial de repasos,
+  progreso, cuaderno de errores y ajustes) en un archivo.
+- **Importar backup:** **reemplaza** todos los datos de este navegador por los del
+  archivo (pide confirmación). Sirve para pasar tus datos a otro dispositivo.
+
 ## Cómo contribuir contenido
 
 Las rutas, módulos y lecciones son archivos **Markdown + YAML** dentro de
@@ -103,7 +128,7 @@ src/
 - [x] 4. Cuaderno de errores
 - [x] 5. Panel de inicio
 - [x] 6. Práctica intercalada
-- [ ] 7. Importar/exportar (CSV y backup JSON)
+- [x] 7. Importar/exportar (CSV y backup JSON)
 - [ ] 8. Publicación en GitHub Pages
 
 ## Licencia

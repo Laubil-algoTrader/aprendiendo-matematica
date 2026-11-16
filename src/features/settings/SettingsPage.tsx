@@ -1,7 +1,9 @@
-// Pantalla de ajustes: límite de tarjetas nuevas, hora de corte del día y tema.
+// Pantalla de ajustes: límite de tarjetas nuevas, hora de corte del día, tema
+// y copia de seguridad (backup) de todos tus datos.
 
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { updateSettings, useSettings } from '../../db/settings'
+import { backupSummary, downloadText, exportBackup, parseBackup, restoreBackup, serializeBackup } from '../../lib/backup'
 import type { ThemePreference } from '../../types/user-data'
 
 export function SettingsPage() {
@@ -103,6 +105,69 @@ export function SettingsPage() {
           </label>
         ))}
       </fieldset>
+
+      <BackupSection />
+    </section>
+  )
+}
+
+/** Exportar e importar todos los datos en un archivo JSON. */
+function BackupSection() {
+  const [message, setMessage] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null)
+
+  async function handleExport() {
+    const backup = await exportBackup()
+    const date = backup.exportedAt.toISOString().slice(0, 10)
+    downloadText(`estudiar-backup-${date}.json`, serializeBackup(backup))
+    setMessage({ kind: 'ok', text: 'Backup descargado. Guardalo en un lugar seguro.' })
+  }
+
+  async function handleImport(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    event.target.value = '' // permite volver a elegir el mismo archivo
+    if (!file) return
+    try {
+      const backup = parseBackup(await file.text())
+      const n = backupSummary(backup)
+      const ok = window.confirm(
+        `Vas a REEMPLAZAR todos tus datos actuales por los del backup del ` +
+          `${backup.exportedAt.toLocaleString('es-AR')}:\n\n` +
+          `• ${n.decks} mazos, ${n.notes} notas y ${n.cards} tarjetas\n` +
+          `• ${n.reviewLogs} repasos registrados\n` +
+          `• ${n.lessonProgress} lecciones con progreso\n` +
+          `• ${n.mistakes} errores en el cuaderno\n\n` +
+          `Lo que tenés ahora se pierde. ¿Continuar?`,
+      )
+      if (!ok) return
+      await restoreBackup(backup)
+      setMessage({ kind: 'ok', text: 'Datos importados correctamente.' })
+    } catch (e) {
+      setMessage({ kind: 'error', text: (e as Error).message })
+    }
+  }
+
+  return (
+    <section className="stack card-box" aria-labelledby="datos">
+      <h2 id="datos">Tus datos</h2>
+      <p className="small muted">
+        Todo se guarda solo en este navegador. Descargá un backup de vez en cuando: si borrás los datos del
+        navegador o cambiás de dispositivo, lo podés importar para recuperar todo.
+      </p>
+      <div className="row-wrap">
+        <button type="button" className="btn btn-primary" onClick={handleExport}>
+          Descargar backup (JSON)
+        </button>
+        <label className="btn">
+          Importar backup…
+          <input type="file" accept=".json,application/json" onChange={handleImport} className="sr-only" />
+        </label>
+      </div>
+      <small className="muted">Importar reemplaza todos los datos actuales (te pide confirmación).</small>
+      {message && (
+        <p role="status" className={message.kind === 'ok' ? 'text-ok' : 'text-error'}>
+          {message.text}
+        </p>
+      )}
     </section>
   )
 }
