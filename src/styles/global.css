@@ -733,6 +733,7 @@ fieldset.field legend {
 }
 
 .big-number {
+  margin: 0;
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.1;
@@ -783,4 +784,31 @@ fieldset.field legend {
 .card-box h3 {
   margin: 0;
   font-size: 1.05rem;
+}
+
+/* ---------- Práctica intercalada ---------- */
+
+.topic-checks li {
+  padding: 0.2rem 0;
+}
+.grade-buttons.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+.topic-reveal {
+  margin-top: 1rem;
+}
+.summary-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.summary-table th,
+.summary-table td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.summary-table td:last-child,
+.summary-table th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }

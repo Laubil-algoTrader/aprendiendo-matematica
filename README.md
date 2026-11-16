@@ -102,7 +102,7 @@ src/
 - [x] 3. Rutas y lecciones (+ contenido inicial)
 - [x] 4. Cuaderno de errores
 - [x] 5. Panel de inicio
-- [ ] 6. Práctica intercalada
+- [x] 6. Práctica intercalada
 - [ ] 7. Importar/exportar (CSV y backup JSON)
 - [ ] 8. Publicación en GitHub Pages
 
