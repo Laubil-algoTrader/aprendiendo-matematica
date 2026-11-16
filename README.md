@@ -13,7 +13,9 @@ Web app open source para estudiar **matemática, física y electrónica**
 - **Cualquiera puede contribuir lecciones** editando archivos de texto en
   `/content`, sin tocar código.
 
-> Estado: en desarrollo (v1 por etapas). Ver "Hoja de ruta" abajo.
+**Usala online:** https://laubil-algotrader.github.io/aprendiendo-matematica/
+
+> Estado: v1 completa. Ver "Hoja de ruta" abajo.
 
 ## Cómo correr el proyecto
 
@@ -49,12 +51,13 @@ publica en GitHub Pages. En los pull requests solo corre los tests.
 
 Pasos para la primera vez:
 
-1. Creá un repositorio **vacío** en GitHub (sin README ni licencia), por ejemplo
-   `app-estudiar`.
-2. Conectá esta carpeta con ese repositorio y subí el código (reemplazá `USUARIO`):
+1. Creá un repositorio **vacío** en GitHub (sin README ni licencia). Este proyecto
+   vive en `Laubil-algoTrader/aprendiendo-matematica`; si hacés un fork, usá el tuyo.
+2. Conectá esta carpeta con ese repositorio y subí el código (reemplazá `USUARIO` y
+   `REPO`):
 
    ```bash
-   git remote add origin https://github.com/USUARIO/app-estudiar.git
+   git remote add origin git@github.com:USUARIO/REPO.git
    git push -u origin main
    ```
 
@@ -62,7 +65,7 @@ Pasos para la primera vez:
    elegí **GitHub Actions**.
 4. En la pestaña **Actions** vas a ver el flujo "Tests y publicación". Si ya había
    corrido antes del paso 3 y falló al publicar, tocá **Re-run jobs**.
-5. Cuando termine, el sitio queda en `https://USUARIO.github.io/app-estudiar/`.
+5. Cuando termine, el sitio queda en `https://USUARIO.github.io/REPO/`.
 
 A partir de ahí, cada `git push` a `main` vuelve a publicar el sitio solo.
 
