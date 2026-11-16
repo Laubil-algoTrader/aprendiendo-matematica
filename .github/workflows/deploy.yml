@@ -1,0 +1,64 @@
+# Tests y publicación automática en GitHub Pages.
+#
+# - En cada pull request y en cada push: revisa tipos, corre los tests
+#   (incluido el que valida todo /content) y compila el sitio.
+# - Solo en push a la rama "main": además publica el sitio en GitHub Pages.
+#
+# Requisito (una sola vez): en GitHub, Settings → Pages → "Build and deployment"
+# → Source: "GitHub Actions".
+
+name: Tests y publicación
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: # permite lanzarlo a mano desde la pestaña "Actions"
+
+# Permisos mínimos: leer el código; publicar en Pages solo en el job "deploy".
+permissions:
+  contents: read
+
+# Si llegan dos publicaciones seguidas, se cancela la vieja.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Tests y compilación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Revisar tipos
+        run: npm run typecheck
+      - name: Tests (incluye la validación de /content)
+        run: npm test
+      - name: Compilar el sitio
+        run: npx vite build
+      - name: Guardar el sitio compilado
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    name: Publicar en GitHub Pages
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write # publicar en Pages
+      id-token: write # verificar que el sitio viene de este repositorio
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v6
+      - id: deployment
+        uses: actions/deploy-pages@v5

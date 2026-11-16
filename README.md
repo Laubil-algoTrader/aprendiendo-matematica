@@ -40,6 +40,36 @@ Otros comandos:
 | `npm run build`     | genera el sitio estático final en `dist/`             |
 | `npm run preview`   | sirve `dist/` para probar el sitio ya compilado       |
 
+## Publicar el sitio (GitHub Pages)
+
+El repositorio incluye un flujo automático (`.github/workflows/deploy.yml`) que, en
+cada cambio, revisa los tipos, corre todos los tests (incluida la validación de
+`/content`) y compila el sitio. Cuando el cambio llega a la rama `main`, además lo
+publica en GitHub Pages. En los pull requests solo corre los tests.
+
+Pasos para la primera vez:
+
+1. Creá un repositorio **vacío** en GitHub (sin README ni licencia), por ejemplo
+   `app-estudiar`.
+2. Conectá esta carpeta con ese repositorio y subí el código (reemplazá `USUARIO`):
+
+   ```bash
+   git remote add origin https://github.com/USUARIO/app-estudiar.git
+   git push -u origin main
+   ```
+
+3. En GitHub, andá a **Settings → Pages → Build and deployment** y en **Source**
+   elegí **GitHub Actions**.
+4. En la pestaña **Actions** vas a ver el flujo "Tests y publicación". Si ya había
+   corrido antes del paso 3 y falló al publicar, tocá **Re-run jobs**.
+5. Cuando termine, el sitio queda en `https://USUARIO.github.io/app-estudiar/`.
+
+A partir de ahí, cada `git push` a `main` vuelve a publicar el sitio solo.
+
+> El sitio usa direcciones con `#` (por ejemplo `.../app-estudiar/#/rutas`) y rutas
+> relativas, así que funciona en cualquier subcarpeta sin configuración extra.
+> Tus datos de estudio no se suben a ningún lado: cada navegador guarda los suyos.
+
 ## Cómo usar las tarjetas
 
 - **Mazos** → crear mazos, ver cuántas tarjetas tocan hoy, repasar.
@@ -129,7 +159,7 @@ src/
 - [x] 5. Panel de inicio
 - [x] 6. Práctica intercalada
 - [x] 7. Importar/exportar (CSV y backup JSON)
-- [ ] 8. Publicación en GitHub Pages
+- [x] 8. Publicación en GitHub Pages
 
 ## Licencia
 
