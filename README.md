@@ -59,7 +59,7 @@ Otros comandos:
 
 Las rutas, módulos y lecciones son archivos **Markdown + YAML** dentro de
 `/content`. El formato exacto está explicado en
-[`content/README.md`](content/README.md) _(se agrega en la etapa 3)_.
+[`content/README.md`](content/README.md), con una plantilla lista para copiar.
 
 Para proponer una lección nueva: hacé un fork, agregá o editá el archivo,
 corré `npm test` (hay un test que valida todo el contenido) y abrí un pull request.
@@ -99,7 +99,7 @@ src/
 
 - [x] 1. Modelo de datos y almacenamiento local
 - [x] 2. Tarjetas y sesión de repaso con FSRS
-- [ ] 3. Rutas y lecciones (+ contenido inicial)
+- [x] 3. Rutas y lecciones (+ contenido inicial)
 - [ ] 4. Cuaderno de errores
 - [ ] 5. Panel de inicio
 - [ ] 6. Práctica intercalada

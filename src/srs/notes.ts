@@ -112,35 +112,54 @@ export function validateNote(input: Pick<NoteInput, 'type' | 'front' | 'back'>):
 }
 
 export async function createNote(input: NoteInput, database: StudyDB = db, now = new Date()): Promise<Note> {
-  const error = validateNote(input)
-  if (error) throw new Error(error)
+  const [note] = await createNotes([input], database, now)
+  return note
+}
+
+/**
+ * Crea varias notas de una sola vez (en una única operación de la base de datos).
+ * Es mucho más rápido que llamar a createNote muchas veces, y si alguna nota es
+ * inválida no se guarda ninguna.
+ */
+export async function createNotes(inputs: NoteInput[], database: StudyDB = db, now = new Date()): Promise<Note[]> {
+  inputs.forEach((input, i) => {
+    const error = validateNote(input)
+    if (error) throw new Error(inputs.length > 1 ? `Nota ${i + 1}: ${error}` : error)
+  })
   const scheduler = await getScheduler()
 
-  const note: Note = {
-    id: newId(),
-    deckId: input.deckId,
-    type: input.type,
-    front: input.front,
-    back: input.back,
-    tags: input.tags,
-    ...(input.source ? { source: input.source } : {}),
-    createdAt: now,
-    updatedAt: now,
+  const notes: Note[] = []
+  const cards: Card[] = []
+  for (const input of inputs) {
+    const note: Note = {
+      id: newId(),
+      deckId: input.deckId,
+      type: input.type,
+      front: input.front,
+      back: input.back,
+      tags: input.tags,
+      ...(input.source ? { source: input.source } : {}),
+      createdAt: now,
+      updatedAt: now,
+    }
+    notes.push(note)
+    for (const ordinal of ordinalsFor(note)) {
+      cards.push({
+        id: newId(),
+        noteId: note.id,
+        deckId: note.deckId,
+        ordinal,
+        suspended: false,
+        fsrs: scheduler.newCard({ now }),
+      })
+    }
   }
-  const cards: Card[] = ordinalsFor(note).map((ordinal) => ({
-    id: newId(),
-    noteId: note.id,
-    deckId: note.deckId,
-    ordinal,
-    suspended: false,
-    fsrs: scheduler.newCard({ now }),
-  }))
 
   await database.transaction('rw', [database.notes, database.cards], async () => {
-    await database.notes.add(note)
+    await database.notes.bulkAdd(notes)
     await database.cards.bulkAdd(cards)
   })
-  return note
+  return notes
 }
 
 /**

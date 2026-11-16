@@ -16,13 +16,31 @@ const rehypePlugins: Parameters<typeof Markdown>[0]['rehypePlugins'] = [
   [rehypeKatex, { throwOnError: false, strict: false }],
 ]
 
-export function MarkdownView({ children, className }: { children: string; className?: string }) {
+/**
+ * @param shiftHeadings baja un nivel los títulos (## pasa a ser h3). Se usa cuando el
+ *   Markdown va dentro de una sección que ya tiene su propio título h2, para que la
+ *   jerarquía de títulos sea correcta (importa para lectores de pantalla).
+ */
+export function MarkdownView({
+  children,
+  className,
+  shiftHeadings = false,
+}: {
+  children: string
+  className?: string
+  shiftHeadings?: boolean
+}) {
   return (
     <div className={['markdown', className].filter(Boolean).join(' ')}>
       <Markdown
         remarkPlugins={remarkPlugins}
         rehypePlugins={rehypePlugins}
         components={{
+          ...(shiftHeadings && {
+            h1: ({ children: c }) => <h2>{c}</h2>,
+            h2: ({ children: c }) => <h3>{c}</h3>,
+            h3: ({ children: c }) => <h4>{c}</h4>,
+          }),
           // Los enlaces externos se abren en otra pestaña, sin pasar datos de esta página.
           a: ({ href, children: linkChildren }) => (
             <a href={href} target="_blank" rel="noopener noreferrer">

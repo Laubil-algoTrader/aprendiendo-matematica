@@ -8,6 +8,9 @@ import { DecksPage } from './features/decks/DecksPage'
 import { NoteEditorPage } from './features/decks/NoteEditorPage'
 import { HomePage } from './features/home/HomePage'
 import { ReviewPage } from './features/review/ReviewPage'
+import { LessonPage } from './features/routes/LessonPage'
+import { RoutePage } from './features/routes/RoutePage'
+import { RoutesPage } from './features/routes/RoutesPage'
 import { SettingsPage } from './features/settings/SettingsPage'
 
 export function App() {
@@ -15,7 +18,9 @@ export function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="rutas" element={<Placeholder title="Rutas de aprendizaje" stage={3} />} />
+        <Route path="rutas" element={<RoutesPage />} />
+        <Route path="rutas/:routeId" element={<RoutePage />} />
+        <Route path="lecciones/:lessonId" element={<LessonPage />} />
         <Route path="repasar" element={<ReviewPage />} />
         <Route path="mazos" element={<DecksPage />} />
         <Route path="tarjetas" element={<CardsPage />} />

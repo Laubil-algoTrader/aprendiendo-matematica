@@ -1,0 +1,31 @@
+# Ruta de aprendizaje. Formato explicado en content/README.md.
+id: ingreso-mecatronica-uncuyo
+titulo: Ingreso Ingeniería Mecatrónica UNCuyo
+descripcion: >-
+  Preparación para el curso de ingreso a Ingeniería en Mecatrónica
+  (Facultad de Ingeniería, UNCuyo). Ruta comunitaria, no oficial:
+  revisá siempre el programa vigente publicado por la facultad.
+
+modulos:
+  - id: comprension-lectora
+    titulo: Comprensión Lectora y Resolución de Problemas
+    descripcion: Leer enunciados con atención, identificar datos e incógnitas y planificar la resolución.
+    lecciones: []
+
+  - id: matematica
+    titulo: Matemática
+    descripcion: Números reales, ecuaciones, funciones y trigonometría.
+    lecciones:
+      - valor-absoluto-inecuaciones
+      - funcion-cuadratica
+      - teorema-seno-coseno
+
+  - id: fisica
+    titulo: Física
+    descripcion: Magnitudes y unidades, cinemática y dinámica básica.
+    lecciones: []
+
+  - id: introduccion-mecatronica
+    titulo: Introducción a la Mecatrónica
+    descripcion: Qué es la mecatrónica, sensores, actuadores y control; primeros pasos con Arduino/ESP32.
+    lecciones: []

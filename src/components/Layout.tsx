@@ -2,11 +2,12 @@
 
 import { useEffect } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router'
+import { content } from '../content'
 import { useSettings } from '../db/settings'
 
 const NAV_ITEMS: { to: string; label: string; end?: boolean; also?: string }[] = [
   { to: '/', label: 'Inicio', end: true },
-  { to: '/rutas', label: 'Rutas' },
+  { to: '/rutas', label: 'Rutas', also: '/lecciones' },
   { to: '/repasar', label: 'Repasar' },
   // "Mazos" también queda marcado mientras se navegan o editan tarjetas.
   { to: '/mazos', label: 'Mazos', also: '/tarjetas' },
@@ -55,6 +56,19 @@ export function Layout() {
         </nav>
       </header>
       <main id="contenido" tabIndex={-1} className="app-main">
+        {/* Solo en desarrollo: avisa si hay errores en los archivos de /content. */}
+        {import.meta.env.DEV && content.errors.length > 0 && (
+          <aside className="card-box notice" role="alert">
+            <strong>Hay {content.errors.length} errores en /content:</strong>
+            <ul className="small">
+              {content.errors.map((e, i) => (
+                <li key={i}>
+                  <code>{e.file}</code>: {e.message}
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
         <Outlet />
       </main>
     </>
