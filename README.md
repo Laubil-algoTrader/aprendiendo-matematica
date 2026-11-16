@@ -40,6 +40,21 @@ Otros comandos:
 | `npm run build`     | genera el sitio estático final en `dist/`             |
 | `npm run preview`   | sirve `dist/` para probar el sitio ya compilado       |
 
+## Cómo usar las tarjetas
+
+- **Mazos** → crear mazos, ver cuántas tarjetas tocan hoy, repasar.
+- **+ Nueva tarjeta** → tres tipos:
+  - *Básica*: frente → dorso.
+  - *Básica e invertida*: genera dos tarjetas (frente → dorso y dorso → frente).
+  - *Cloze*: texto con huecos `{{c1::respuesta}}` o `{{c1::respuesta::pista}}`.
+    Cada número (`c1`, `c2`…) es una tarjeta distinta. Funciona dentro de fórmulas.
+- **Repasar** → atajos: `Espacio` muestra la respuesta, `1` Otra vez, `2` Difícil,
+  `3` Bien, `4` Fácil, `Ctrl+Z` deshace la última calificación.
+- La cola de cada día tiene las tarjetas vencidas más hasta 15 nuevas
+  (configurable en **Ajustes**). De una misma nota se ve una sola tarjeta nueva por día.
+- El programa de repasos lo calcula [FSRS](https://github.com/open-spaced-repetition/ts-fsrs)
+  (versión FSRS-7) apuntando a recordar el 90 % de las tarjetas.
+
 ## Cómo contribuir contenido
 
 Las rutas, módulos y lecciones son archivos **Markdown + YAML** dentro de
@@ -83,7 +98,7 @@ src/
 ## Hoja de ruta (v1)
 
 - [x] 1. Modelo de datos y almacenamiento local
-- [ ] 2. Tarjetas y sesión de repaso con FSRS
+- [x] 2. Tarjetas y sesión de repaso con FSRS
 - [ ] 3. Rutas y lecciones (+ contenido inicial)
 - [ ] 4. Cuaderno de errores
 - [ ] 5. Panel de inicio

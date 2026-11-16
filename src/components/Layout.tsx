@@ -1,14 +1,15 @@
 // Estructura común a todas las pantallas: encabezado, menú y contenido.
 
 import { useEffect } from 'react'
-import { NavLink, Outlet } from 'react-router'
+import { NavLink, Outlet, useLocation } from 'react-router'
 import { useSettings } from '../db/settings'
 
-const NAV_ITEMS = [
+const NAV_ITEMS: { to: string; label: string; end?: boolean; also?: string }[] = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/rutas', label: 'Rutas' },
   { to: '/repasar', label: 'Repasar' },
-  { to: '/mazos', label: 'Mazos' },
+  // "Mazos" también queda marcado mientras se navegan o editan tarjetas.
+  { to: '/mazos', label: 'Mazos', also: '/tarjetas' },
   { to: '/errores', label: 'Errores' },
   { to: '/practica', label: 'Práctica' },
   { to: '/ajustes', label: 'Ajustes' },
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
 
 export function Layout() {
   const { theme } = useSettings()
+  const { pathname } = useLocation()
 
   // Aplica el tema elegido. Con "system" no ponemos nada y el CSS sigue al sistema operativo.
   useEffect(() => {
@@ -38,7 +40,13 @@ export function Layout() {
           <ul className="nav-list">
             {NAV_ITEMS.map((item) => (
               <li key={item.to}>
-                <NavLink to={item.to} end={item.end}>
+                <NavLink
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) =>
+                    isActive || (item.also && pathname.startsWith(item.also)) ? 'active' : undefined
+                  }
+                >
                   {item.label}
                 </NavLink>
               </li>

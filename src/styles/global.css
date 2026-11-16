@@ -19,6 +19,8 @@
   --focus: #f0a400;
   --ok: #1d7a3a;
   --error: #b42318;
+  --warn: #a15c00;
+  --new: #2459c4;
   --radius: 10px;
   --shadow: 0 1px 3px rgb(0 0 0 / 0.08);
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif;
@@ -37,6 +39,8 @@
     --primary-text: #0b1220;
     --ok: #4cc27a;
     --error: #ff7b72;
+    --warn: #e3a23b;
+    --new: #6b9cff;
     --shadow: none;
   }
 }
@@ -52,6 +56,8 @@
   --primary-text: #0b1220;
   --ok: #4cc27a;
   --error: #ff7b72;
+  --warn: #e3a23b;
+  --new: #6b9cff;
   --shadow: none;
 }
 
@@ -236,4 +242,236 @@ input[type='number'] {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--primary-text);
+}
+
+/* ---------- Listas, encabezados de página y etiquetas ---------- */
+
+.small {
+  font-size: 0.875rem;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.page-header h1 {
+  margin: 0;
+}
+
+.actions,
+.row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.deck-row,
+.note-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+.deck-row h2 {
+  margin: 0;
+}
+.deck-row p,
+.note-row p {
+  margin: 0.25rem 0 0;
+}
+.note-text {
+  min-width: 0;
+  flex: 1 1 18rem;
+}
+.note-front {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.inline-form,
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.grow {
+  flex: 1 1 14rem;
+}
+.full {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.badge-new {
+  color: var(--new);
+  border-color: currentColor;
+}
+.badge-due {
+  color: var(--ok);
+  border-color: currentColor;
+}
+.badge-learning {
+  color: var(--error);
+  border-color: currentColor;
+}
+.badge-muted {
+  color: var(--muted);
+}
+
+.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-danger {
+  color: var(--error);
+}
+.btn-link {
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+kbd {
+  font-family: ui-monospace, monospace;
+  font-size: 0.75em;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0 0.3em;
+  opacity: 0.8;
+}
+
+code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+/* ---------- Markdown ---------- */
+
+.markdown {
+  overflow-wrap: anywhere;
+}
+.markdown > :first-child {
+  margin-top: 0;
+}
+.markdown > :last-child {
+  margin-bottom: 0;
+}
+/* Las fórmulas largas se desplazan en vez de desbordar la pantalla del celular. */
+.markdown .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+.markdown table {
+  border-collapse: collapse;
+}
+.markdown th,
+.markdown td {
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.6rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+/* ---------- Sesión de repaso ---------- */
+
+.review-card {
+  min-height: 10rem;
+  font-size: 1.15rem;
+  padding: 1.5rem;
+}
+.review-card:focus {
+  outline: none;
+}
+
+.review-controls {
+  margin: 1rem 0;
+}
+.btn-wide {
+  width: 100%;
+  justify-content: center;
+  padding: 0.85rem;
+  font-size: 1.05rem;
+}
+
+.grade-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+@media (max-width: 480px) {
+  .grade-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.grade {
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.6rem 0.25rem;
+  font-weight: 600;
+}
+.grade small {
+  font-weight: 400;
+  color: var(--muted);
+}
+.grade-again {
+  border-color: var(--error);
+  color: var(--error);
+}
+.grade-hard {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+.grade-good {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.grade-easy {
+  border-color: var(--new);
+  color: var(--new);
+}
+
+.review-footer {
+  gap: 1rem;
+}
+
+.done-box .big {
+  font-size: 1.4rem;
+  margin-top: 0;
 }

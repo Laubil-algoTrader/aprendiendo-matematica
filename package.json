@@ -15,9 +15,14 @@
   "dependencies": {
     "dexie": "^4.4.7",
     "dexie-react-hooks": "^4.4.0",
+    "katex": "^0.19.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
     "react-router": "^8.5.1",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
     "ts-fsrs": "^6.0.0"
   },
   "devDependencies": {
@@ -32,5 +37,8 @@
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vitest": "^5.1.0"
+  },
+  "overrides": {
+    "katex": "$katex"
   }
 }
