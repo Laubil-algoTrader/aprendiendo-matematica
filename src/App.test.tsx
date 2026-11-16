@@ -22,11 +22,11 @@ beforeEach(async () => {
 })
 
 describe('App', () => {
-  it('muestra el menú principal y la página de inicio', () => {
+  it('muestra el menú principal y la página de inicio', async () => {
     renderAt('/')
     expect(screen.getByRole('navigation', { name: 'Principal' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Repasar' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Hola')
+    expect(await screen.findByRole('heading', { level: 2, name: 'Repaso de hoy' })).toBeInTheDocument()
   })
 
   it('guarda el límite de tarjetas nuevas desde Ajustes', async () => {

@@ -707,3 +707,80 @@ fieldset.field legend {
   display: flex;
   flex-direction: column;
 }
+
+/* ---------- Panel de inicio ---------- */
+
+/* Oculto a la vista pero legible por lectores de pantalla. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0 1rem;
+}
+.dashboard p {
+  margin: 0;
+}
+
+.big-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.week {
+  list-style: none;
+  display: flex;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+.week li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  color: var(--muted);
+}
+.week .dot {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+}
+.week .studied .dot {
+  background: var(--warn);
+  border-color: var(--warn);
+}
+.week li:last-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.module-progress {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.module-progress li {
+  display: grid;
+  grid-template-columns: minmax(7rem, 35%) 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+.card-box h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
